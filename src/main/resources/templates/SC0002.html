@@ -8,12 +8,20 @@
 		crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body th:object="${model}">
 	<main class="container d-flex flex-column bd-highlight mb-3">
 		<div class="bd-highlight">
 			<h1 class="text-center">社員管理システム</h1>
 		</div>
-		<div class="bd-highlight">
+		<div>
+			<select>
+				<option value=""></option>
+				<option th:each="value : *{affiliationList}" th:value="${value.AffiliationCd}"
+					th:text="${value.AffiliationNm}">
+				</option>
+			</select>
+		</div>
+		<div class=" bd-highlight">
 			<form class="text-center" th:action="@{entry/back}" method="get">
 				<button class="">戻る</button>
 			</form>

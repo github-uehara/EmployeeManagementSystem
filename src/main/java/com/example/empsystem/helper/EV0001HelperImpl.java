@@ -1,10 +1,12 @@
 package com.example.empsystem.helper;
 
+import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
 import com.example.empsystem.common.MessageList;
+import com.example.empsystem.helper.Interface.EV0001Helper;
 import com.example.empsystem.model.SCRN0001Model;
 import com.example.empsystem.model.SessionScopeModel;
 
@@ -38,7 +40,7 @@ public class EV0001HelperImpl implements EV0001Helper {
 	 */
 	@Override
 	public SCRN0001Model init() {
-		SCRN0001Model model = new SCRN0001Model(new String());
+		SCRN0001Model model = new SCRN0001Model();
 
 		return model;
 	}
@@ -52,7 +54,7 @@ public class EV0001HelperImpl implements EV0001Helper {
 		MessageList msgList = new MessageList();
 
 		String empId = htmlModel.getEmployeeId();
-		ArrayList<String> errorMsg = new ArrayList<String>();
+		List<String> errorMsg = new ArrayList<String>();
 
 		if (empId.isEmpty()) {
 			errorMsg.add(msgList.COMMSG0001(MSG_PARAM1));
@@ -64,7 +66,7 @@ public class EV0001HelperImpl implements EV0001Helper {
 
 		// エラーメッセージがなければ、セッションに社員IDを設定する
 		if (errorMsg.size() == NOT_EXIST_ERROR_SIZE) {
-			session.setEmpId(empId);
+			session.setEmployeeId(empId);
 		} else {
 			model.setErrorMsg(errorMsg);
 		}

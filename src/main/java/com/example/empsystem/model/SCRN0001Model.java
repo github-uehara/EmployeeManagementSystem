@@ -1,6 +1,6 @@
 package com.example.empsystem.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SCRN0001Modelを管理するクラス
@@ -10,25 +10,14 @@ import java.util.ArrayList;
  */
 public class SCRN0001Model {
 
-	/**
-	 * employeeId : 社員ID errorMsg : エラーメッセージリスト
-	 */
 	private String employeeId;
-	private ArrayList<String> errorMsg;
+	private List<String> errorMsg;
 
 	/**
 	 * コンストラクタ（引数なし）
 	 */
 	public SCRN0001Model() {
-	}
-
-	/**
-	 * コンストラクタ（引数あり）
-	 * 
-	 * @param employeeId 社員ID
-	 */
-	public SCRN0001Model(String employeeId) {
-		this.employeeId = employeeId;
+		this.employeeId = new String();
 	}
 
 	public String getEmployeeId() {
@@ -39,11 +28,11 @@ public class SCRN0001Model {
 		this.employeeId = employeeId;
 	}
 
-	public ArrayList<String> getErrorMsg() {
+	public List<String> getErrorMsg() {
 		return errorMsg;
 	}
 
-	public void setErrorMsg(ArrayList<String> errorMsg) {
+	public void setErrorMsg(List<String> errorMsg) {
 		this.errorMsg = errorMsg;
 	}
 }

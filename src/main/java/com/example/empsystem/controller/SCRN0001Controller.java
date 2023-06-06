@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.empsystem.helper.EV0001Helper;
+import com.example.empsystem.helper.Interface.EV0001Helper;
 import com.example.empsystem.model.SCRN0001Model;
 
 /**

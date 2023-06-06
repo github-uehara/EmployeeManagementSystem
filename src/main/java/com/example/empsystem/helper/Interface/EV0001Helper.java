@@ -1,4 +1,4 @@
-package com.example.empsystem.helper;
+package com.example.empsystem.helper.Interface;
 
 import com.example.empsystem.model.SCRN0001Model;
 
