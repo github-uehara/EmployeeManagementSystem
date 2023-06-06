@@ -44,3 +44,7 @@ GET: /foo/bar?name=uehara.koya
 GET : 値をWebサーバに渡さないとき（値が見られてもOKなら、GETでも可）  
 POST: 値をWebサーバに渡すとき  
 と使い分ける。  
+
+参考  
+[GETとPOSTの違いについて](https://qiita.com/kanataxa/items/522efb74421255f0e0a1)  
+[「GETメソッド」と「POSTメソッド」の違い](https://wa3.i-3-i.info/diff7method.html)
