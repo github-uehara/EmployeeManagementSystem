@@ -8,24 +8,61 @@
 		crossorigin="anonymous"></script>
 </head>
 
-<body th:object="${model}">
-	<main class="container d-flex flex-column bd-highlight mb-3">
+<body th:object="${form}">
+	<main class="container d-flex flex-column mb-3">
 		<div class="bd-highlight">
-			<h1 class="text-center">社員管理システム</h1>
+			<h1 class="text-center">新規社員登録</h1>
 		</div>
-		<div>
-			<select>
-				<option value=""></option>
-				<option th:each="value : *{affiliationList}" th:value="${value.AffiliationCd}"
-					th:text="${value.AffiliationNm}">
-				</option>
-			</select>
-		</div>
-		<div class=" bd-highlight">
-			<form class="text-center" th:action="@{entry/back}" method="get">
-				<button class="">戻る</button>
-			</form>
-		</div>
+		<form th:action="@{entry/execute}" method="post">
+			<div class="d-flex flex-fill">
+				<p>社員ID　</p>
+				<input type="text" th:field="*{EmployeeInfo.employeeId}">
+			</div>
+			<div class="d-flex flex-fill">
+				<p>所属部署</p>
+				<select>
+					<option value=""></option>
+					<option th:each="value : *{affiliationList}" th:value="${value.affiliationCd}"
+						th:text="${value.affiliationNm}">
+					</option>
+				</select>
+			</div>
+			<div class="d-flex flex-fill">
+				<p>役職　　</p>
+				<select>
+					<option value=""></option>
+					<option th:each="value : *{positionList}" th:value="${value.positionCd}"
+						th:text="${value.positionNm}">
+					</option>
+				</select>
+			</div>
+			<div class="d-flex flex-fill">
+				<p>社員名　</p>
+				<input type="text" th:field="*{EmployeeInfo.employeeNm}" />
+			</div>
+			<div class="d-flex flex-fill">
+				<input type="radio" name="gender" th:value="1" th:text="男" th:checked="*{1 == EmployeeInfo.gender}" />
+				<input type="radio" name="gender" th:value="2" th:text="女" th:checked="*{2 == EmployeeInfo.gender}" />
+				<input type="checkbox" name="foreignNationality" th:text="外国籍"
+					th:checked="*{true == EmployeeInfo.foreignNationality}" />
+			</div>
+			<div class="d-flex flex-fill">
+				<p>生年月日</p>
+				<input type="text" th:field="*{EmployeeInfo.birthday}" />
+			</div>
+			<div class="d-flex flex-fill">
+				<p>基本給料</p>
+				<input type="text" th:field="*{EmployeeInfo.baseSalary}" />
+			</div>
+			<div class="d-flex flex-fill">
+				<p>メモ　　　</p>
+				<input type="text" th:field="*{EmployeeInfo.memo}" />
+			</div>
+			<button>新規登録</button>
+		</form>
+		<form class="text-center" th:action="@{entry/back}" method="get">
+			<button class="">戻る</button>
+		</form>
 	</main>
 </body>
 

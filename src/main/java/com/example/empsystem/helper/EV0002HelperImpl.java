@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.empsystem.helper.Interface.EV0002Helper;
 import com.example.empsystem.logic.Interface.EV8002Logic;
+import com.example.empsystem.logic.Interface.EV8003Logic;
 import com.example.empsystem.model.AffiliationList;
 import com.example.empsystem.model.EmployeeInfo;
-import com.example.empsystem.model.SCRN0002Model;
+import com.example.empsystem.model.PositionList;
+import com.example.empsystem.model.SCRN0002Form;
 import com.example.empsystem.model.SessionScopeModel;
 import com.example.empsystem.model.DO.AffiliationDO;
+import com.example.empsystem.model.DO.PositionDO;
 
 /**
  * EV0002Helperを実装するクラス
@@ -26,53 +29,58 @@ public class EV0002HelperImpl implements EV0002Helper {
 
 	private final SessionScopeModel session;
 	private final EV8002Logic ev8002;
+	private final EV8003Logic ev8003;
 
 	/**
 	 * コンストラクタ
 	 * 
 	 * @param session
 	 */
-	public EV0002HelperImpl(SessionScopeModel session, EV8002Logic ev8002) {
+	public EV0002HelperImpl(SessionScopeModel session, EV8002Logic ev8002, EV8003Logic ev8003) {
 		this.session = session;
 		this.ev8002 = ev8002;
-	}
-
-	@Override
-	public SCRN0002Model init() {
-		SCRN0002Model model = new SCRN0002Model();
-
-		// セッションに役職情報が設定されているか確認する
-		if (session.getAffiliationList() == null) {
-			List<AffiliationDO> results = ev8002.findAll();
-
-			List<AffiliationList> affiliationList = converAffiliationList(results);
-			
-			session.setAffiliationList(affiliationList);
-		}
-		model.setAffiliationList(session.getAffiliationList());
-
-		return model;
-	}
-
-	@Override
-	public ArrayList<String> entry(EmployeeInfo empInfo) {
-		return null;
+		this.ev8003 = ev8003;
 	}
 
 	/**
-	 * 部署マスタ情報をセッション用のモデルに変換する
+	 * 初期表示
 	 * 
-	 * @param results
 	 * @return
 	 */
-	public List<AffiliationList> converAffiliationList(List<AffiliationDO> results) {
-		List<AffiliationList> lists = new ArrayList<AffiliationList>();
+	@Override
+	public SCRN0002Form init() {
+		SCRN0002Form scrn0002Form = new SCRN0002Form();
 
-		for (AffiliationDO result : results) {
-			lists.add(new AffiliationList(result));
+		// セッションに部署情報が設定されているか確認する
+		if (session.getAffiliationList() == null) {
+			List<AffiliationDO> results = ev8002.findAll();
+
+			List<AffiliationList> affiliationList = ev8002.converAffiliationList(results);
+			session.setAffiliationList(affiliationList);
 		}
+		scrn0002Form.setAffiliationList(session.getAffiliationList());
 
-		return lists;
+		// セッションに役職情報が設定されているか確認する
+		if (session.getPositonList() == null) {
+			List<PositionDO> results = ev8003.findAll();
+
+			List<PositionList> positionList = ev8003.converPositionList(results);
+			session.setPositonList(positionList);
+		}
+		scrn0002Form.setPositionList(session.getPositonList());
+
+		return scrn0002Form;
+	}
+
+	/**
+	 * 新規登録ボタン押下
+	 * 
+	 * @param empInfo
+	 * @return
+	 */
+	@Override
+	public ArrayList<String> entry(EmployeeInfo empInfo) {
+		return null;
 	}
 
 }

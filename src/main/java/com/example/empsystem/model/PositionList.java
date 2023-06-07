@@ -1,5 +1,7 @@
 package com.example.empsystem.model;
 
+import com.example.empsystem.model.DO.PositionDO;
+
 /**
  * 役職情報リストを管理するクラス
  * 
@@ -8,23 +10,33 @@ package com.example.empsystem.model;
  */
 public class PositionList {
 
-	private String PositionCd;
-	private String PositionNm;
+	private String positionCd;
+	private String positionNm;
+
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param positionDo
+	 */
+	public PositionList(PositionDO positionDo) {
+		this.positionCd = positionDo.getPositionCd();
+		this.positionNm = positionDo.getPositionNm();
+	}
 
 	public String getPositionCd() {
-		return PositionCd;
+		return positionCd;
 	}
 
 	public void setPositionCd(String positionCd) {
-		PositionCd = positionCd;
+		this.positionCd = positionCd;
 	}
 
 	public String getPositionNm() {
-		return PositionNm;
+		return positionNm;
 	}
 
 	public void setPositionNm(String positionNm) {
-		PositionNm = positionNm;
+		this.positionNm = positionNm;
 	}
 
 }

@@ -3,11 +3,13 @@ package com.example.empsystem.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.empsystem.helper.Interface.EV0002Helper;
-import com.example.empsystem.model.SCRN0002Model;
+import com.example.empsystem.model.EmployeeInfo;
+import com.example.empsystem.model.SCRN0002Form;
 
 @RequestMapping("employee/entry")
 @Controller
@@ -28,10 +30,15 @@ public class SCRN0002Controller {
 	 */
 	@PostMapping()
 	public String index(Model model) {
-		SCRN0002Model scrn0002Model = ev0002Helper.init();
-		model.addAttribute("model", scrn0002Model);
+		SCRN0002Form scrn0002Form = ev0002Helper.init();
+		model.addAttribute("form", scrn0002Form);
 
 		return "SC0002";
+	}
+
+	@PostMapping("execute")
+	public String execute(@ModelAttribute("form") EmployeeInfo employeeInfo, Model model) {
+		return "SC0003";
 	}
 
 	/**

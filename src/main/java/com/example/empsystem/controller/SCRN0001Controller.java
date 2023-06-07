@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.empsystem.helper.Interface.EV0001Helper;
-import com.example.empsystem.model.SCRN0001Model;
+import com.example.empsystem.model.SCRN0001Form;
 
 /**
  * 社員管理システムメニュー画面 コントローラ
@@ -38,8 +38,8 @@ public class SCRN0001Controller {
 	 */
 	@GetMapping({ "", "menu" })
 	public String index(Model model) {
-		SCRN0001Model scrn0001Model = ev0001Helper.init();
-		model.addAttribute("model", scrn0001Model);
+		SCRN0001Form scrn0001Form = ev0001Helper.init();
+		model.addAttribute("form", scrn0001Form);
 
 		return "SC0001";
 	}
@@ -48,13 +48,13 @@ public class SCRN0001Controller {
 	 * 社員照会・更新
 	 */
 	@PostMapping("confirmUpdate")
-	public String confirmUpdate(@ModelAttribute("model") SCRN0001Model htmlModel, Model model) {
-		SCRN0001Model scrn0001Model = ev0001Helper.confirmEmployeeId(htmlModel);
+	public String confirmUpdate(@ModelAttribute("form") SCRN0001Form scrn0001Form, Model model) {
+		SCRN0001Form form = ev0001Helper.confirmEmployeeId(scrn0001Form);
 
-		model.addAttribute("model", scrn0001Model);
+		model.addAttribute("form", form);
 
 		// バリエーションチェックエラーがあれば再表示
-		if (scrn0001Model.getErrorMsg() != null) {
+		if (form.getErrorMsg() != null) {
 			return "SC0001";
 		}
 

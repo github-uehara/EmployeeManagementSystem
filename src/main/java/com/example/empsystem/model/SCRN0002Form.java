@@ -8,7 +8,7 @@ import java.util.List;
  * @author DC-PCN1139
  *
  */
-public class SCRN0002Model {
+public class SCRN0002Form {
 
 	private EmployeeInfo employeeInfo;
 	private List<AffiliationList> affiliationList;
@@ -18,7 +18,7 @@ public class SCRN0002Model {
 	/**
 	 * コンストラクタ（引数なし）
 	 */
-	public SCRN0002Model() {
+	public SCRN0002Form() {
 	}
 
 	public EmployeeInfo getEmployeeInfo() {

@@ -17,11 +17,11 @@ public class EmployeeInfo {
 	private String employeeId;
 	private String affiliationCd;
 	private String positionCd;
-	private String employeeName;
+	private String employeeNm;
 	private int gender;
 	private DateTime birthday;
 	private Boolean foreignNationality;
-	private BigDecimal BaseSalary;
+	private BigDecimal baseSalary;
 	private String memo;
 
 	/**
@@ -31,11 +31,11 @@ public class EmployeeInfo {
 		this.employeeId = new String();
 		this.affiliationCd = new String();
 		this.positionCd = new String();
-		this.employeeName = new String();
+		this.employeeNm = new String();
 		this.gender = FIXED_GENDER_MALE;
 		this.birthday = null;
 		this.foreignNationality = false;
-		this.BaseSalary = null;
+		this.baseSalary = null;
 		this.memo = new String();
 	}
 
@@ -63,12 +63,12 @@ public class EmployeeInfo {
 		this.positionCd = positionCd;
 	}
 
-	public String getEmployeeName() {
-		return employeeName;
+	public String getEmployeeNm() {
+		return employeeNm;
 	}
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setEmployeeNm(String employeeNm) {
+		this.employeeNm = employeeNm;
 	}
 
 	public int getGender() {
@@ -96,11 +96,11 @@ public class EmployeeInfo {
 	}
 
 	public BigDecimal getBaseSalary() {
-		return BaseSalary;
+		return baseSalary;
 	}
 
 	public void setBaseSalary(BigDecimal baseSalary) {
-		BaseSalary = baseSalary;
+		this.baseSalary = baseSalary;
 	}
 
 	public String getMemo() {

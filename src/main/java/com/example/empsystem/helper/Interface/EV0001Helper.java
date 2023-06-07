@@ -1,6 +1,6 @@
 package com.example.empsystem.helper.Interface;
 
-import com.example.empsystem.model.SCRN0001Model;
+import com.example.empsystem.model.SCRN0001Form;
 
 /**
  * 社員管理システムメニュー画面イベントを定義するインタフェース
@@ -15,7 +15,7 @@ public interface EV0001Helper {
 	 * 
 	 * @return
 	 */
-	public SCRN0001Model init();
+	public SCRN0001Form init();
 
 	/**
 	 * 社員ID入力チェック
@@ -23,5 +23,5 @@ public interface EV0001Helper {
 	 * @param htmlModel
 	 * @return
 	 */
-	public SCRN0001Model confirmEmployeeId(SCRN0001Model htmlModel);
+	public SCRN0001Form confirmEmployeeId(SCRN0001Form htmlModel);
 }

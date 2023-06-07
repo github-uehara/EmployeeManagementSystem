@@ -8,7 +8,7 @@ import java.util.List;
  * @author DC-PCN1139
  *
  */
-public class SCRN0001Model {
+public class SCRN0001Form {
 
 	private String employeeId;
 	private List<String> errorMsg;
@@ -16,7 +16,7 @@ public class SCRN0001Model {
 	/**
 	 * コンストラクタ（引数なし）
 	 */
-	public SCRN0001Model() {
+	public SCRN0001Form() {
 		this.employeeId = new String();
 	}
 

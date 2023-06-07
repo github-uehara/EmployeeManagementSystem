@@ -10,28 +10,33 @@ import com.example.empsystem.model.DO.AffiliationDO;
  */
 public class AffiliationList {
 
-	private String AffiliationCd;
-	private String AffiliationNm;
+	private String affiliationCd;
+	private String affiliationNm;
 
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param result
+	 */
 	public AffiliationList(AffiliationDO result) {
-		this.AffiliationCd = result.AffiliationCd;
-		this.AffiliationNm = result.AffiliationNm;
+		this.affiliationCd = result.affiliationCd;
+		this.affiliationNm = result.affiliationNm;
 	}
 
 	public String getAffiliationCd() {
-		return AffiliationCd;
+		return affiliationCd;
 	}
 
 	public void setAffiliationCd(String affiliationCd) {
-		AffiliationCd = affiliationCd;
+		this.affiliationCd = affiliationCd;
 	}
 
 	public String getAffiliationNm() {
-		return AffiliationNm;
+		return affiliationNm;
 	}
 
 	public void setAffiliationNm(String affiliationNm) {
-		AffiliationNm = affiliationNm;
+		this.affiliationNm = affiliationNm;
 	}
 
 }

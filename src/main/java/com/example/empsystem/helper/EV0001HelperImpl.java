@@ -1,13 +1,13 @@
 package com.example.empsystem.helper;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.empsystem.common.MessageList;
 import com.example.empsystem.helper.Interface.EV0001Helper;
-import com.example.empsystem.model.SCRN0001Model;
+import com.example.empsystem.model.SCRN0001Form;
 import com.example.empsystem.model.SessionScopeModel;
 
 /**
@@ -39,8 +39,8 @@ public class EV0001HelperImpl implements EV0001Helper {
 	 * 初期表示
 	 */
 	@Override
-	public SCRN0001Model init() {
-		SCRN0001Model model = new SCRN0001Model();
+	public SCRN0001Form init() {
+		SCRN0001Form model = new SCRN0001Form();
 
 		return model;
 	}
@@ -49,11 +49,11 @@ public class EV0001HelperImpl implements EV0001Helper {
 	 * 社員ID入力チェック
 	 */
 	@Override
-	public SCRN0001Model confirmEmployeeId(SCRN0001Model htmlModel) {
-		SCRN0001Model model = new SCRN0001Model();
+	public SCRN0001Form confirmEmployeeId(SCRN0001Form scrn0001form) {
+		SCRN0001Form form = new SCRN0001Form();
 		MessageList msgList = new MessageList();
 
-		String empId = htmlModel.getEmployeeId();
+		String empId = scrn0001form.getEmployeeId();
 		List<String> errorMsg = new ArrayList<String>();
 
 		if (empId.isEmpty()) {
@@ -68,10 +68,10 @@ public class EV0001HelperImpl implements EV0001Helper {
 		if (errorMsg.size() == NOT_EXIST_ERROR_SIZE) {
 			session.setEmployeeId(empId);
 		} else {
-			model.setErrorMsg(errorMsg);
+			form.setErrorMsg(errorMsg);
 		}
 
-		return model;
+		return form;
 	}
 
 }

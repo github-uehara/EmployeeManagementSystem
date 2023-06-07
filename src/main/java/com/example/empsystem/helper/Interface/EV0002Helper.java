@@ -3,7 +3,7 @@ package com.example.empsystem.helper.Interface;
 import java.util.ArrayList;
 
 import com.example.empsystem.model.EmployeeInfo;
-import com.example.empsystem.model.SCRN0002Model;
+import com.example.empsystem.model.SCRN0002Form;
 
 /**
  * 社員登録画面イベントを定義するインタフェース
@@ -18,7 +18,7 @@ public interface EV0002Helper {
 	 * 
 	 * @return
 	 */
-	public SCRN0002Model init();
+	public SCRN0002Form init();
 
 	/**
 	 * 新規登録ボタン押下

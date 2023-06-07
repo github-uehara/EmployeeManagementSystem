@@ -3,104 +3,104 @@ package com.example.empsystem.model.DO;
 import java.util.Map;
 
 /**
- * 部署情報（全件）を管理するクラス
+ * 部署マスタ情報を管理するクラス
  * 
  * @author DC-PCN1139
  *
  */
 public class AffiliationDO {
 
-	public String AffiliationCd;
-	public String ManagementCd;
-	public String BrunchCd;
-	public String GroupCd;
-	public String ManagementNm;
-	public String BrunchNm;
-	public String GroupNm;
-	public String ManagementEmployeeId;
-	public String AffiliationNm;
-	
+	public String affiliationCd;
+	public String managementCd;
+	public String brunchCd;
+	public String groupCd;
+	public String managementNm;
+	public String brunchNm;
+	public String groupNm;
+	public String managementEmployeeId;
+	public String affiliationNm;
+
 	public AffiliationDO(Map<String, Object> result) {
-		this.AffiliationCd = (String) result.get("affiliation_cd");
-		this.ManagementCd = (String) result.get("management_cd");
-		this.BrunchCd = (String) result.get("brunch_cd");
-		this.GroupCd = (String) result.get("group_cd");
-		this.ManagementNm = (String) result.get("management_nm");
-		this.BrunchNm = (String) result.get("brunch_nm");
-		this.GroupNm = (String) result.get("group_nm");
-		this.ManagementEmployeeId = (String) result.get("management_employee_id");
+		this.affiliationCd = (String) result.get("affiliation_cd");
+		this.managementCd = (String) result.get("management_cd");
+		this.brunchCd = (String) result.get("brunch_cd");
+		this.groupCd = (String) result.get("group_cd");
+		this.managementNm = (String) result.get("management_nm");
+		this.brunchNm = (String) result.get("brunch_nm");
+		this.groupNm = (String) result.get("group_nm");
+		this.managementEmployeeId = (String) result.get("management_employee_id");
 	}
 
 	public String getAffiliationCd() {
-		return AffiliationCd;
+		return affiliationCd;
 	}
 
 	public void setAffiliationCd(String affiliationCd) {
-		AffiliationCd = affiliationCd;
+		this.affiliationCd = affiliationCd;
 	}
 
 	public String getManagementCd() {
-		return ManagementCd;
+		return managementCd;
 	}
 
 	public void setManagementCd(String managementCd) {
-		ManagementCd = managementCd;
+		this.managementCd = managementCd;
 	}
 
 	public String getBrunchCd() {
-		return BrunchCd;
+		return brunchCd;
 	}
 
 	public void setBrunchCd(String brunchCd) {
-		BrunchCd = brunchCd;
+		this.brunchCd = brunchCd;
 	}
 
 	public String getGroupCd() {
-		return GroupCd;
+		return groupCd;
 	}
 
 	public void setGroupCd(String groupCd) {
-		GroupCd = groupCd;
+		this.groupCd = groupCd;
 	}
 
 	public String getManagementNm() {
-		return ManagementNm;
+		return managementNm;
 	}
 
 	public void setManagementNm(String managementNm) {
-		ManagementNm = managementNm;
+		this.managementNm = managementNm;
 	}
 
 	public String getBrunchNm() {
-		return BrunchNm;
+		return brunchNm;
 	}
 
 	public void setBrunchNm(String brunchNm) {
-		BrunchNm = brunchNm;
+		this.brunchNm = brunchNm;
 	}
 
 	public String getGroupNm() {
-		return GroupNm;
+		return groupNm;
 	}
 
 	public void setGroupNm(String groupNm) {
-		GroupNm = groupNm;
+		this.groupNm = groupNm;
 	}
 
 	public String getManagementEmployeeId() {
-		return ManagementEmployeeId;
+		return managementEmployeeId;
 	}
 
 	public void setManagementEmployeeId(String managementEmployeeId) {
-		ManagementEmployeeId = managementEmployeeId;
+		this.managementEmployeeId = managementEmployeeId;
 	}
 
 	public String getAffiliationNm() {
-		return AffiliationNm;
+		return affiliationNm;
 	}
 
 	public void setAffiliationNm(String affiliationNm) {
-		AffiliationNm = affiliationNm;
+		this.affiliationNm = affiliationNm;
 	}
 
 }

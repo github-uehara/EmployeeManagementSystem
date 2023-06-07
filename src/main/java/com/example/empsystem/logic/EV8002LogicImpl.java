@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.empsystem.logic.Interface.EV8002Logic;
+import com.example.empsystem.model.AffiliationList;
 import com.example.empsystem.model.DO.AffiliationDO;
 
 /**
@@ -25,6 +26,11 @@ public class EV8002LogicImpl implements EV8002Logic {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	/**
+	 * 部署マスタ情報全件取得
+	 * 
+	 * @return
+	 */
 	@Override
 	public List<AffiliationDO> findAll() {
 		String sql = "SELECT * FROM m_affiliation";
@@ -50,6 +56,23 @@ public class EV8002LogicImpl implements EV8002Logic {
 		}
 
 		return affiliationList;
+	}
+
+	/**
+	 * 部署マスタ情報をセッション用のモデルに変換する
+	 * 
+	 * @param results
+	 * @return
+	 */
+	@Override
+	public List<AffiliationList> converAffiliationList(List<AffiliationDO> results) {
+		List<AffiliationList> lists = new ArrayList<AffiliationList>();
+
+		for (AffiliationDO result : results) {
+			lists.add(new AffiliationList(result));
+		}
+
+		return lists;
 	}
 
 }
