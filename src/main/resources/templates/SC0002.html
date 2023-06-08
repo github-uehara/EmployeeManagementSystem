@@ -8,59 +8,70 @@
 		crossorigin="anonymous"></script>
 </head>
 
-<body th:object="${form}">
+<body>
 	<main class="container d-flex flex-column mb-3">
 		<div class="bd-highlight">
 			<h1 class="text-center">新規社員登録</h1>
 		</div>
-		<form th:action="@{entry/execute}" method="post">
+		<th:block th:if="${form.errorList != null}">
+			<div class="text-center">
+				<th:block th:each="message : ${form.errorList}">
+					<p class="text-danger mb-1" th:text="${message}"></p>
+				</th:block>
+			</div>
+		</th:block>
+		<form th:action="@{/employee/entry/execute}" method="post" th:object="${form.employeeInfo}">
 			<div class="d-flex flex-fill">
 				<p>社員ID　</p>
-				<input type="text" th:field="*{EmployeeInfo.employeeId}">
+				<input type="text" name="employeeId" th:value="*{employeeId}">
 			</div>
 			<div class="d-flex flex-fill">
 				<p>所属部署</p>
-				<select>
-					<option value=""></option>
-					<option th:each="value : *{affiliationList}" th:value="${value.affiliationCd}"
-						th:text="${value.affiliationNm}">
-					</option>
+				<select name="affiliationCd" />
+				<option></option>
+				<option th:each="value : ${form.affiliationList}" th:value="${value.affiliationCd}"
+					th:selected="${value.affiliationCd == selectedAffiriationCd}">
+					[[${value.affiliationNm}]]
+				</option>
 				</select>
 			</div>
-			<div class="d-flex flex-fill">
+			<div class=" d-flex flex-fill">
 				<p>役職　　</p>
-				<select>
-					<option value=""></option>
-					<option th:each="value : *{positionList}" th:value="${value.positionCd}"
-						th:text="${value.positionNm}">
-					</option>
+				<select name="positionCd" />
+				<option></option>
+				<option name="affiliationCd" th:each="value : ${form.positionList}" th:value="${value.positionCd}"
+					th:selected="${value.positionCd == selectedPositionCd}">
+					[[${value.positionNm}]]
+				</option>
 				</select>
 			</div>
 			<div class="d-flex flex-fill">
 				<p>社員名　</p>
-				<input type="text" th:field="*{EmployeeInfo.employeeNm}" />
+				<input type="text" name="employeeNm" th:value="*{employeeNm}" />
 			</div>
 			<div class="d-flex flex-fill">
-				<input type="radio" name="gender" th:value="1" th:text="男" th:checked="*{1 == EmployeeInfo.gender}" />
-				<input type="radio" name="gender" th:value="2" th:text="女" th:checked="*{2 == EmployeeInfo.gender}" />
+				<input type="radio" name="gender" th:value="1" th:text="男" th:checked="*{1 == gender}" />
+				<input type="radio" name="gender" th:value="2" th:text="女" th:checked="*{2 == gender}" />
+				<input type="radio" name="gender" th:value="3" th:text="その他" th:checked="*{3 == gender}" />
 				<input type="checkbox" name="foreignNationality" th:text="外国籍"
-					th:checked="*{true == EmployeeInfo.foreignNationality}" />
+					th:checked="*{true == foreignNationality}" />
 			</div>
 			<div class="d-flex flex-fill">
 				<p>生年月日</p>
-				<input type="text" th:field="*{EmployeeInfo.birthday}" />
+				<input type="text" name="birthday"
+					th:value="${#dates.format(form.employeeInfo.birthday, 'yyyy/MM/dd')}">
 			</div>
 			<div class="d-flex flex-fill">
 				<p>基本給料</p>
-				<input type="text" th:field="*{EmployeeInfo.baseSalary}" />
+				<input type="text" name="baseSalary" th:value="*{baseSalary}" />
 			</div>
 			<div class="d-flex flex-fill">
 				<p>メモ　　　</p>
-				<input type="text" th:field="*{EmployeeInfo.memo}" />
+				<input type="text" name="memo" th:value="*{memo}" />
 			</div>
 			<button>新規登録</button>
 		</form>
-		<form class="text-center" th:action="@{entry/back}" method="get">
+		<form class="text-center" th:action="@{/employee/entry/back}" method="get">
 			<button class="">戻る</button>
 		</form>
 	</main>

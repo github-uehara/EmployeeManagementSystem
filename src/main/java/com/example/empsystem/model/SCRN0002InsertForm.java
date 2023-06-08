@@ -1,39 +1,22 @@
 package com.example.empsystem.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 /**
- * 社員情報管理モデル
+ * 更新用フォーム
  * 
  * @author DC-PCN1139
  *
  */
-public class EmployeeInfo {
-
-	final int FIXED_GENDER_MALE = 1;
+public class SCRN0002InsertForm {
 
 	private String employeeId;
 	private String affiliationCd;
 	private String positionCd;
 	private String employeeNm;
 	private int gender;
-	private Date birthday;
+	private String birthday;
 	private Boolean foreignNationality;
-	private BigDecimal baseSalary;
+	private String baseSalary;
 	private String memo;
-
-	public EmployeeInfo() {
-		this.employeeId = new String();
-		this.affiliationCd = new String();
-		this.positionCd = new String();
-		this.employeeNm = new String();
-		this.gender = FIXED_GENDER_MALE;
-		this.birthday = null;
-		this.foreignNationality = false;
-		this.baseSalary = null;
-		this.memo = new String();
-	}
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -75,11 +58,11 @@ public class EmployeeInfo {
 		this.gender = gender;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -91,11 +74,11 @@ public class EmployeeInfo {
 		this.foreignNationality = foreignNationality;
 	}
 
-	public BigDecimal getBaseSalary() {
+	public String getBaseSalary() {
 		return baseSalary;
 	}
 
-	public void setBaseSalary(BigDecimal baseSalary) {
+	public void setBaseSalary(String baseSalary) {
 		this.baseSalary = baseSalary;
 	}
 
@@ -109,7 +92,7 @@ public class EmployeeInfo {
 
 	@Override
 	public String toString() {
-		return "EmployeeInfo [employeeId=" + employeeId + ", affiliationCd=" + affiliationCd + ", positionCd="
+		return "SCRN0002InsertForm [employeeId=" + employeeId + ", affiliationCd=" + affiliationCd + ", positionCd="
 				+ positionCd + ", employeeNm=" + employeeNm + ", gender=" + gender + ", birthday=" + birthday
 				+ ", foreignNationality=" + foreignNationality + ", baseSalary=" + baseSalary + ", memo=" + memo + "]";
 	}

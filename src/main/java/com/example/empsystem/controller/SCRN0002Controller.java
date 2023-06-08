@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.empsystem.helper.Interface.EV0002Helper;
-import com.example.empsystem.model.EmployeeInfo;
 import com.example.empsystem.model.SCRN0002Form;
+import com.example.empsystem.model.SCRN0002InsertForm;
 
 @RequestMapping("employee/entry")
 @Controller
@@ -23,7 +23,7 @@ public class SCRN0002Controller {
 
 	/**
 	 * アクション : AC0002-01 <br>
-	 * サマリー : EV0002-01を実行する
+	 * サマリー : 初期表示
 	 * 
 	 * @param model
 	 * @return アクション結果
@@ -31,14 +31,31 @@ public class SCRN0002Controller {
 	@PostMapping()
 	public String index(Model model) {
 		SCRN0002Form scrn0002Form = ev0002Helper.init();
+
 		model.addAttribute("form", scrn0002Form);
 
 		return "SC0002";
 	}
 
+	/**
+	 * アクション : AC0002-02 <br>
+	 * サマリー : 新規登録
+	 * 
+	 * @param employeeInfo
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("execute")
-	public String execute(@ModelAttribute("form") EmployeeInfo employeeInfo, Model model) {
-		return "SC0003";
+	public String execute(@ModelAttribute SCRN0002InsertForm insertForm, Model model) {
+		System.out.println(insertForm.toString());
+
+		SCRN0002Form scrn0002Form = ev0002Helper.entry(insertForm);
+
+		model.addAttribute("form", scrn0002Form);
+		model.addAttribute("selectedAffiriationCd", scrn0002Form.getEmployeeInfo().getAffiliationCd());
+		model.addAttribute("selectedPositionCd", scrn0002Form.getEmployeeInfo().getPositionCd());
+
+		return "SC0002";
 	}
 
 	/**

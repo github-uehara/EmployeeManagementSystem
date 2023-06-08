@@ -3,7 +3,7 @@ package com.example.empsystem.model;
 import java.util.List;
 
 /**
- * SCRN0002Modelを管理するクラス
+ * SCRN0002Formを管理するクラス
  * 
  * @author DC-PCN1139
  *
@@ -13,12 +13,13 @@ public class SCRN0002Form {
 	private EmployeeInfo employeeInfo;
 	private List<AffiliationList> affiliationList;
 	private List<PositionList> positionList;
-	private List<String> errorMsg;
+	private List<String> errorList;
 
 	/**
 	 * コンストラクタ（引数なし）
 	 */
 	public SCRN0002Form() {
+		this.employeeInfo = new EmployeeInfo();
 	}
 
 	public EmployeeInfo getEmployeeInfo() {
@@ -45,12 +46,12 @@ public class SCRN0002Form {
 		this.positionList = positionList;
 	}
 
-	public List<String> getErrorMsg() {
-		return errorMsg;
+	public List<String> getErrorList() {
+		return errorList;
 	}
 
-	public void setErrorMsg(List<String> errorMsg) {
-		this.errorMsg = errorMsg;
+	public void setErrorList(List<String> errorList) {
+		this.errorList = errorList;
 	}
 
 }

@@ -12,7 +12,7 @@ import com.example.empsystem.model.AffiliationList;
 import com.example.empsystem.model.DO.AffiliationDO;
 
 /**
- * EV8002Logicを実装するクラス
+ * EV8002Logic実装クラス
  * 
  * @author DC-PCN1139
  *
