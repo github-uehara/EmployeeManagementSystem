@@ -3,15 +3,24 @@ package com.example.empsystem.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.example.empsystem.common.MessageList;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 社員情報管理モデル
  * 
  * @author DC-PCN1139
  *
  */
+@Getter
+@Setter
 public class EmployeeInfo {
 
 	final int FIXED_GENDER_MALE = 1;
+
+	private MessageList msgList = new MessageList();
 
 	private String employeeId;
 	private String affiliationCd;
@@ -33,85 +42,6 @@ public class EmployeeInfo {
 		this.foreignNationality = false;
 		this.baseSalary = null;
 		this.memo = new String();
-	}
-
-	public String getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getAffiliationCd() {
-		return affiliationCd;
-	}
-
-	public void setAffiliationCd(String affiliationCd) {
-		this.affiliationCd = affiliationCd;
-	}
-
-	public String getPositionCd() {
-		return positionCd;
-	}
-
-	public void setPositionCd(String positionCd) {
-		this.positionCd = positionCd;
-	}
-
-	public String getEmployeeNm() {
-		return employeeNm;
-	}
-
-	public void setEmployeeNm(String employeeNm) {
-		this.employeeNm = employeeNm;
-	}
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public Boolean getForeignNationality() {
-		return foreignNationality;
-	}
-
-	public void setForeignNationality(Boolean foreignNationality) {
-		this.foreignNationality = foreignNationality;
-	}
-
-	public BigDecimal getBaseSalary() {
-		return baseSalary;
-	}
-
-	public void setBaseSalary(BigDecimal baseSalary) {
-		this.baseSalary = baseSalary;
-	}
-
-	public String getMemo() {
-		return memo;
-	}
-
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-
-	@Override
-	public String toString() {
-		return "EmployeeInfo [employeeId=" + employeeId + ", affiliationCd=" + affiliationCd + ", positionCd="
-				+ positionCd + ", employeeNm=" + employeeNm + ", gender=" + gender + ", birthday=" + birthday
-				+ ", foreignNationality=" + foreignNationality + ", baseSalary=" + baseSalary + ", memo=" + memo + "]";
 	}
 
 }

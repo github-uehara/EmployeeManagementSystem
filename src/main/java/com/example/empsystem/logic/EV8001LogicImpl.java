@@ -23,6 +23,11 @@ public class EV8001LogicImpl implements EV8001Logic {
 
 	private final JdbcTemplate jdbcTemplate;
 
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param jdbcTemplate
+	 */
 	public EV8001LogicImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
@@ -36,6 +41,8 @@ public class EV8001LogicImpl implements EV8001Logic {
 	@Override
 	public EmployeeInfo findByPrimaryKey(String employeeId) {
 		String sql = "SELECT * FROM employee WHERE employee_id = ?";
+
+		// BeanPropertyRowMapperの使用
 		RowMapper<EmployeeInfo> rowMapper = new BeanPropertyRowMapper<EmployeeInfo>(EmployeeInfo.class);
 
 		EmployeeInfo empInfo = new EmployeeInfo();

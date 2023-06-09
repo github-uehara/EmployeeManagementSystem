@@ -31,7 +31,15 @@ public class MessageList {
 		}
 	};
 
+	/**
+	 * メッセージID : EV00020001
+	 */
 	public String EV00020001 = "既に登録済みの社員番号です。";
+
+	/**
+	 * メッセージID : EV00030001
+	 */
+	public String EV00030001 = "指定した社員IDでは、社員情報が照会できませんでした。";
 
 	/**
 	 * カテゴリ : 共通 <br>
@@ -60,6 +68,15 @@ public class MessageList {
 		return String.format("%sは%sで入力してください。", formatParam, param2);
 	}
 
+	/**
+	 * カテゴリ : マスタ <br>
+	 * メッセージID : DBMST00001 <br>
+	 * メッセージ : {0}マスタに存在しない{1}を指定しています。
+	 * 
+	 * @param param1
+	 * @param param2
+	 * @return
+	 */
 	public String DBMST00001(String param1, String param2) {
 		String formatParam1 = map.get(param1);
 		String formatParam2 = map.get(param2);

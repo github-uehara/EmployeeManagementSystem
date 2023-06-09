@@ -58,6 +58,6 @@ public class SCRN0001Controller {
 			return "SC0001";
 		}
 
-		return "SC0003";
+		return "redirect:/employee/update";
 	}
 }

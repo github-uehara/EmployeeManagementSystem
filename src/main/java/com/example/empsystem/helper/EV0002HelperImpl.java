@@ -216,6 +216,13 @@ public class EV0002HelperImpl implements EV0002Helper {
 		} catch (Exception ex) {
 		}
 
+		if (insertForm.getForeignNationality() == null) {
+			// 外国籍:チェックがない場合、falseを設定
+			empInfo.setForeignNationality(false);
+		} else {
+			empInfo.setForeignNationality(true);
+		}
+
 		try {
 			if (insertForm.getBirthday().isEmpty()) {
 				// 生年月日:必須
@@ -242,7 +249,7 @@ public class EV0002HelperImpl implements EV0002Helper {
 			errorList.add(msgList.COMMSG0002("baseSalary", String.format(MSG_PARAM2, "")));
 		}
 
-		empInfo.setForeignNationality(insertForm.getForeignNationality());
+		// メモ
 		empInfo.setMemo(insertForm.getMemo());
 
 		scrn0002Form.setEmployeeInfo(empInfo);
