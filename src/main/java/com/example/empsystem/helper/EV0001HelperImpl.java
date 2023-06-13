@@ -1,17 +1,18 @@
 package com.example.empsystem.helper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
-import com.example.empsystem.common.MessageList;
 import com.example.empsystem.helper.Interface.EV0001Helper;
 import com.example.empsystem.model.SCRN0001Form;
 import com.example.empsystem.model.SessionScopeModel;
 
 /**
- * EV0001Helperを実装するクラス
+ * EV0001Helper実装クラス
  * 
  * @author DC-PCN1139
  *
@@ -19,18 +20,14 @@ import com.example.empsystem.model.SessionScopeModel;
 @Service
 public class EV0001HelperImpl implements EV0001Helper {
 
-	final String MSG_PARAM = "%d文字";
-	final int FIXED_EMP_ID_LENGTH = 8;
-	final int NOT_EXIST_ERROR_SIZE = 0;
-
-	private final SessionScopeModel session;
+	private MessageSource messageSource;
+	private SessionScopeModel session;
 
 	/**
 	 * コンストラクタ
-	 * 
-	 * @param session
 	 */
-	public EV0001HelperImpl(SessionScopeModel session) {
+	public EV0001HelperImpl(MessageSource messageSource, SessionScopeModel session) {
+		this.messageSource = messageSource;
 		this.session = session;
 	}
 
@@ -39,35 +36,26 @@ public class EV0001HelperImpl implements EV0001Helper {
 	 */
 	@Override
 	public SCRN0001Form init() {
-		SCRN0001Form model = new SCRN0001Form();
-
-		return model;
+		return new SCRN0001Form();
 	}
 
 	/**
-	 * 社員ID入力チェック
+	 * 社員照会・更新
+	 * 
+	 * @param form
+	 * @param result
+	 * @return
 	 */
 	@Override
-	public SCRN0001Form confirmEmployeeId(SCRN0001Form scrn0001form) {
-		SCRN0001Form form = new SCRN0001Form();
-		MessageList msgList = new MessageList();
+	public SCRN0001Form confirmUpdate(SCRN0001Form form, BindingResult result) {
 
-		String empId = scrn0001form.getEmployeeId();
-		List<String> errorMsg = new ArrayList<String>();
-
-		if (empId.isEmpty()) {
-			errorMsg.add(msgList.COMMSG0001("employeeId"));
-		}
-
-		if (empId.length() != FIXED_EMP_ID_LENGTH) {
-			errorMsg.add(msgList.COMMSG0002("employeeId", String.format(MSG_PARAM, FIXED_EMP_ID_LENGTH)));
-		}
-
-		// エラーメッセージがなければ、セッションに社員IDを設定する
-		if (errorMsg.size() == NOT_EXIST_ERROR_SIZE) {
-			session.setEmployeeId(empId);
+		// バリデーションチェックエラーがあれば、日本語のエラーメッセージを設定する
+		if (result.hasErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
+				form.getResult().add(messageSource.getMessage(error, Locale.JAPANESE));
+			}
 		} else {
-			form.setErrorMsg(errorMsg);
+			session.setEmployeeId(form.getEmployeeId());
 		}
 
 		return form;

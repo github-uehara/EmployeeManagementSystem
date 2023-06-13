@@ -3,7 +3,6 @@ package com.example.empsystem.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.empsystem.helper.Interface.EV0002Helper;
+import com.example.empsystem.model.EmployeeInfo;
 import com.example.empsystem.model.SCRN0002Form;
-import com.example.empsystem.model.SCRN0002InsertForm;
 
 @RequestMapping("employee/entry")
 @Controller
@@ -25,19 +24,17 @@ public class SCRN0002Controller {
 	}
 
 	/**
-	 * アクション : AC0002-01 <br>
-	 * サマリー : 初期表示
+	 * 初期表示
 	 * 
 	 * @param model
-	 * @return アクション結果
+	 * @return
 	 */
 	@PostMapping()
 	public String index(Model model) {
-		SCRN0002Form scrn0002Form = ev0002Helper.init();
+		SCRN0002Form form = ev0002Helper.init();
+		model.addAttribute("form", form);
 
-		model.addAttribute("form", scrn0002Form);
-
-		return "SC0002";
+		return "SCRN0002";
 	}
 
 	/**
@@ -49,20 +46,14 @@ public class SCRN0002Controller {
 	 * @return
 	 */
 	@PostMapping("execute")
-	public String execute(@Validated @ModelAttribute SCRN0002InsertForm insertForm, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			for (ObjectError error : result.getAllErrors()) {
-				System.out.println(error);
-			}
-		}
-		System.out.println("=========================");
-		SCRN0002Form scrn0002Form = ev0002Helper.entry(insertForm);
+	public String execute(@Validated @ModelAttribute EmployeeInfo empInfo, BindingResult result, Model model) {
+		SCRN0002Form scrn0002Form = ev0002Helper.entry(empInfo, result);
 
 		model.addAttribute("form", scrn0002Form);
 		model.addAttribute("selectedAffiriationCd", scrn0002Form.getEmployeeInfo().getAffiliationCd());
 		model.addAttribute("selectedPositionCd", scrn0002Form.getEmployeeInfo().getPositionCd());
 
-		return "SC0002";
+		return "SCRN0002";
 	}
 
 	/**

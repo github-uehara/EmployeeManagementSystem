@@ -1,9 +1,11 @@
 package com.example.empsystem.helper.Interface;
 
+import org.springframework.validation.BindingResult;
+
 import com.example.empsystem.model.SCRN0001Form;
 
 /**
- * 社員管理システムメニュー画面イベントを定義するインタフェース
+ * 社員管理システムメニュー画面イベント定義 インタフェース
  * 
  * @author DC-PCN1139
  *
@@ -18,10 +20,12 @@ public interface EV0001Helper {
 	public SCRN0001Form init();
 
 	/**
-	 * 社員ID入力チェック
+	 * 社員照会・更新
 	 * 
-	 * @param htmlModel
+	 * @param form
+	 * @param result
 	 * @return
 	 */
-	public SCRN0001Form confirmEmployeeId(SCRN0001Form htmlModel);
+	public SCRN0001Form confirmUpdate(SCRN0001Form form, BindingResult result);
+
 }

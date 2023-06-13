@@ -1,5 +1,8 @@
 package com.example.empsystem.helper.Interface;
 
+import org.springframework.validation.BindingResult;
+
+import com.example.empsystem.model.EmployeeInfo;
 import com.example.empsystem.model.SCRN0003Form;
 
 /**
@@ -17,4 +20,21 @@ public interface EV0003Helper {
 	 */
 	public SCRN0003Form init();
 
+	/**
+	 * 更新ボタン押下
+	 * 
+	 * @param empInfo
+	 * @param result
+	 * @return
+	 */
+	public SCRN0003Form execute(EmployeeInfo empInfo, BindingResult result);
+	
+	/**
+	 * 削除ボタン押下
+	 * 
+	 * @param empInfo
+	 * @param result
+	 * @return
+	 */
+	public SCRN0003Form delete(EmployeeInfo empInfo, BindingResult result);
 }

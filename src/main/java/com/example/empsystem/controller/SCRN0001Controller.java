@@ -2,6 +2,8 @@ package com.example.empsystem.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,7 @@ public class SCRN0001Controller {
 
 	final int NOT_EXIST_ERROR_SIZE = 0;
 
+	// DI
 	private final EV0001Helper ev0001Helper;
 
 	/**
@@ -33,29 +36,35 @@ public class SCRN0001Controller {
 		this.ev0001Helper = ev0001Helper;
 	}
 
-	/*
+	/**
 	 * 初期表示
+	 * 
+	 * @param model
+	 * @return
 	 */
 	@GetMapping({ "", "menu" })
 	public String index(Model model) {
-		SCRN0001Form scrn0001Form = ev0001Helper.init();
-		model.addAttribute("form", scrn0001Form);
-
-		return "SC0001";
-	}
-
-	/*
-	 * 社員照会・更新
-	 */
-	@PostMapping("confirmUpdate")
-	public String confirmUpdate(@ModelAttribute("form") SCRN0001Form scrn0001Form, Model model) {
-		SCRN0001Form form = ev0001Helper.confirmEmployeeId(scrn0001Form);
-
+		SCRN0001Form form = ev0001Helper.init();
 		model.addAttribute("form", form);
 
-		// バリエーションチェックエラーがあれば再表示
-		if (form.getErrorMsg() != null) {
-			return "SC0001";
+		return "SCRN0001";
+	}
+
+	/**
+	 * 社員照会・更新
+	 * 
+	 * @param form
+	 * @param result
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("confirmUpdate")
+	public String confirmUpdate(@Validated @ModelAttribute SCRN0001Form form, BindingResult result, Model model) {
+		form = ev0001Helper.confirmUpdate(form, result);
+		model.addAttribute("form", form);
+
+		if (result.hasErrors()) {
+			return "SCRN0001";
 		}
 
 		return "redirect:/employee/update";

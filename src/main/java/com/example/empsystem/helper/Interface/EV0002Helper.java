@@ -1,7 +1,9 @@
 package com.example.empsystem.helper.Interface;
 
+import org.springframework.validation.BindingResult;
+
+import com.example.empsystem.model.EmployeeInfo;
 import com.example.empsystem.model.SCRN0002Form;
-import com.example.empsystem.model.SCRN0002InsertForm;
 
 /**
  * 社員登録画面イベント定義 インタフェース
@@ -21,8 +23,9 @@ public interface EV0002Helper {
 	/**
 	 * 新規登録ボタン押下
 	 * 
-	 * @param insertForm
+	 * @param empInfo
+	 * @param result
 	 * @return
 	 */
-	public SCRN0002Form entry(SCRN0002InsertForm insertForm);
+	public SCRN0002Form entry(EmployeeInfo empInfo, BindingResult result);
 }

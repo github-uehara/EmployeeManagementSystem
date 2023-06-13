@@ -3,12 +3,15 @@ package com.example.empsystem.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 /**
- * 共通のメッセージリストを管理するクラス
+ * 共通のメッセージリスト管理クラス
  * 
  * @author DC-PCN1139
  *
  */
+@Service
 public class MessageList {
 
 	Map<String, String> map = new HashMap<String, String>() {
@@ -40,6 +43,11 @@ public class MessageList {
 	 * メッセージID : EV00030001
 	 */
 	public String EV00030001 = "指定した社員IDでは、社員情報が照会できませんでした。";
+	
+	/**
+	 * メッセージID : EV00030002
+	 */
+	public String EV00030002 = "指定した社員IDでは、社員情報を更新できませんでした。";
 
 	/**
 	 * カテゴリ : 共通 <br>

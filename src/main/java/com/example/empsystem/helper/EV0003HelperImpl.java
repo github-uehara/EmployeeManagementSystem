@@ -3,6 +3,7 @@ package com.example.empsystem.helper;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.empsystem.common.MessageList;
@@ -59,9 +60,9 @@ public class EV0003HelperImpl implements EV0003Helper {
 		// 社員照会
 		EmployeeInfo empInfo = ev8001.findByPrimaryKey(session.getEmployeeId());
 		if (empInfo.getEmployeeId().isEmpty()) {
-			scrn0003Form.getErrorList().add(msgList.EV00030001);
+			scrn0003Form.getResult().add(msgList.EV00030001);
 		}
-		
+
 		scrn0003Form.setEmployeeInfo(empInfo);
 
 		// 部署・役職情報設定
@@ -70,6 +71,44 @@ public class EV0003HelperImpl implements EV0003Helper {
 		scrn0003Form.setPositionList(session.getPositonList());
 
 		return scrn0003Form;
+	}
+
+	/**
+	 * 更新ボタン押下
+	 * 
+	 * @param empInfo
+	 * @param result
+	 * @return
+	 */
+	public SCRN0003Form execute(EmployeeInfo empInfo, BindingResult result) {
+		SCRN0003Form scrn0003Form = new SCRN0003Form();
+		scrn0003Form.setEmployeeInfo(empInfo);
+
+		// 社員更新
+		EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(session.getEmployeeId());
+		if (!(existEmpInfo.getEmployeeId().isEmpty())) {
+
+		} else {
+			scrn0003Form.getResult().add(msgList.EV00030002);
+		}
+
+		// 部署・役職情報設定
+		confirmSession(session);
+		scrn0003Form.setAffiliationList(session.getAffiliationList());
+		scrn0003Form.setPositionList(session.getPositonList());
+
+		return scrn0003Form;
+	}
+
+	/**
+	 * 削除ボタン押下
+	 * 
+	 * @param empInfo
+	 * @param result
+	 * @return
+	 */
+	public SCRN0003Form delete(EmployeeInfo empInfo, BindingResult result) {
+		return null;
 	}
 
 	/**

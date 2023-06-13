@@ -19,14 +19,14 @@ public class SCRN0003Form {
 	private EmployeeInfo employeeInfo;
 	private List<AffiliationList> affiliationList;
 	private List<PositionList> positionList;
-	private List<String> errorList;
+	private List<String> result;
 
 	/**
 	 * コンストラクタ（引数なし）
 	 */
 	public SCRN0003Form() {
 		this.employeeInfo = new EmployeeInfo();
-		this.errorList = new ArrayList<String>();
+		this.result = new ArrayList<String>();
 	}
 
 }

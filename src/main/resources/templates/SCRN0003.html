@@ -1,6 +1,9 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+	<meta charset="UTF-8">
+	<title>社員情報照会・更新画面</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -13,17 +16,16 @@
 		<div class="bd-highlight">
 			<h1 class="text-center">社員情報照会・更新</h1>
 		</div>
-		<th:block th:if="${form.errorList.size() != 0}">
-			<div class="text-center">
-				<th:block th:each="message : ${form.errorList}">
-					<p class="text-danger mb-1" th:text="${message}"></p>
-				</th:block>
-			</div>
-		</th:block>
+		<div class="text-center">
+			<th:block th:each="error : ${form.result}">
+				<p class="text-danger mb-1" th:text="${error}"></p>
+			</th:block>
+		</div>
 		<form th:action="@{/employee/update/execute}" method="post" th:object="${form.employeeInfo}">
+			<hidden name="employeeId" th:value="*{employeeId}"></hidden>
 			<div class="d-flex flex-fill">
 				<p>社員ID　</p>
-				<input type="text" name="employeeId" th:value="*{employeeId}">
+				<input type="text" name="employeeId" th:value="*{employeeId}" readonly>
 			</div>
 			<div class="d-flex flex-fill">
 				<p>所属部署</p>
@@ -58,8 +60,8 @@
 			</div>
 			<div class="d-flex flex-fill">
 				<p>生年月日</p>
-				<input type="text" name="birthday"
-					th:value="${#dates.format(form.employeeInfo.birthday, 'yyyy/MM/dd')}">
+				<input type="date" name="birthday"
+					th:value="${#dates.format(form.employeeInfo.birthday, 'yyyy-MM-dd')}">
 			</div>
 			<div class="d-flex flex-fill">
 				<p>基本給料</p>
