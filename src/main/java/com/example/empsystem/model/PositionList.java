@@ -2,12 +2,17 @@ package com.example.empsystem.model;
 
 import com.example.empsystem.model.DO.PositionDO;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * 役職情報リストを管理するクラス
+ * 役職情報リスト管理クラス
  * 
  * @author DC-PCN1139
  *
  */
+@Getter
+@Setter
 public class PositionList {
 
 	private String positionCd;
@@ -21,22 +26,6 @@ public class PositionList {
 	public PositionList(PositionDO positionDo) {
 		this.positionCd = positionDo.getPositionCd();
 		this.positionNm = positionDo.getPositionNm();
-	}
-
-	public String getPositionCd() {
-		return positionCd;
-	}
-
-	public void setPositionCd(String positionCd) {
-		this.positionCd = positionCd;
-	}
-
-	public String getPositionNm() {
-		return positionNm;
-	}
-
-	public void setPositionNm(String positionNm) {
-		this.positionNm = positionNm;
 	}
 
 }

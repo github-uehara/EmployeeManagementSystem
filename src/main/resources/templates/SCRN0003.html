@@ -75,6 +75,7 @@
 		</form>
 		<form th:action="@{/employee/update/delete}" method="post">
 			<button class="">削除</button>
+			<input name="employeeId" th:value="${form.employeeInfo.employeeId}" type=hidden></input>
 		</form>
 		<form th:action="@{/employee/update/back}" method="get">
 			<button class="">戻る</button>

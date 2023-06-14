@@ -17,6 +17,8 @@ import com.example.empsystem.model.SCRN0002Form;
 @Controller
 public class SCRN0002Controller {
 
+	private final int NOT_EXIST_ERROR_SIZE = 0;
+
 	private final EV0002Helper ev0002Helper;
 
 	public SCRN0002Controller(EV0002Helper ev0002Helper) {
@@ -48,6 +50,10 @@ public class SCRN0002Controller {
 	@PostMapping("execute")
 	public String execute(@Validated @ModelAttribute EmployeeInfo empInfo, BindingResult result, Model model) {
 		SCRN0002Form scrn0002Form = ev0002Helper.entry(empInfo, result);
+
+		if (scrn0002Form.getResult().size() == NOT_EXIST_ERROR_SIZE) {
+			return "SCRN0004";
+		}
 
 		model.addAttribute("form", scrn0002Form);
 		model.addAttribute("selectedAffiriationCd", scrn0002Form.getEmployeeInfo().getAffiliationCd());

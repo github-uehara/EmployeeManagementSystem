@@ -67,4 +67,36 @@ public class EV8001LogicImpl implements EV8001Logic {
 				empInfo.getBaseSalary(), empInfo.getMemo(), USER, new Date(), USER, new Date());
 	}
 
+	/**
+	 * 社員情報更新
+	 * 
+	 * @param empInfo
+	 * @return
+	 */
+	@Override
+	public int update(EmployeeInfo empInfo) {
+		String sql = "UPDATE employee "
+				+ "SET affiliation_cd = ?, position_cd = ?, employee_nm = ?, gender = ?, birthday = ?, foreign_nationality = ?, base_salary = ?, memo = ?, update_user = ?, update_time = ? "
+				+ "WHERE employee_id = ?;";
+
+		int result = jdbcTemplate.update(sql, empInfo.getAffiliationCd(), empInfo.getPositionCd(),
+				empInfo.getEmployeeNm(), empInfo.getGender(), empInfo.getBirthday(), empInfo.getForeignNationality(),
+				empInfo.getBaseSalary(), empInfo.getMemo(), USER, new Date(), empInfo.getEmployeeId());
+
+		return result;
+	}
+
+	/**
+	 * 社員情報削除
+	 * 
+	 * @param employeeId
+	 * @return
+	 */
+	@Override
+	public int delete(String employeeId) {
+		String sql = "DELETE FROM employee WHERE employee_id = ?";
+		int result = jdbcTemplate.update(sql, employeeId);
+
+		return result;
+	}
 }

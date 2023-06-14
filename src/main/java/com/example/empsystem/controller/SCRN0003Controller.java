@@ -16,7 +16,7 @@ import com.example.empsystem.model.SCRN0003Form;
 @RequestMapping("employee/update")
 @Controller
 public class SCRN0003Controller {
-	
+
 	private final int NOT_EXIST_ERROR_SIZE = 0;
 
 	private final EV0003Helper ev0003Helper;
@@ -53,7 +53,7 @@ public class SCRN0003Controller {
 	@PostMapping("execute")
 	public String execute(@Validated @ModelAttribute EmployeeInfo empInfo, BindingResult result, Model model) {
 		SCRN0003Form scrn0003Form = ev0003Helper.execute(empInfo, result);
-		
+
 		if (scrn0003Form.getResult().size() == NOT_EXIST_ERROR_SIZE) {
 			return "SCRN0004";
 		}
@@ -66,24 +66,32 @@ public class SCRN0003Controller {
 	}
 
 	/**
-	 * アクション : AC0003-03 <br>
-	 * サマリー : EV0003-03を実行する
+	 * 削除ボタン押下
 	 * 
+	 * @param empInfo
 	 * @param model
-	 * @return アクション結果
+	 * @return
 	 */
 	@PostMapping("delete")
-	public String delete(Model model) {
-		SCRN0003Form scrn0003Form;
+	public String delete(@ModelAttribute EmployeeInfo empInfo, Model model) {
+		SCRN0003Form scrn0003Form = ev0003Helper.delete(empInfo);
+
+		if (scrn0003Form.getResult().size() == NOT_EXIST_ERROR_SIZE) {
+			return "SCRN0004";
+		}
+
+		model.addAttribute("form", scrn0003Form);
+		model.addAttribute("selectedAffiriationCd", scrn0003Form.getEmployeeInfo().getAffiliationCd());
+		model.addAttribute("selectedPositionCd", scrn0003Form.getEmployeeInfo().getPositionCd());
+
 		return "SCRN0003";
 	}
 
 	/**
-	 * アクション:AC0003-04 <br>
-	 * サマリー:戻る
+	 * 戻る
 	 * 
 	 * @param model
-	 * @return アクション結果
+	 * @return
 	 */
 	@GetMapping("back")
 	public String back(Model model) {

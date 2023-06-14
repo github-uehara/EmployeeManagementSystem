@@ -2,9 +2,10 @@ package com.example.empsystem.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.example.empsystem.logic.Interface.EV8002Logic;
@@ -34,14 +35,11 @@ public class EV8002LogicImpl implements EV8002Logic {
 	@Override
 	public List<AffiliationDO> findAll() {
 		String sql = "SELECT * FROM m_affiliation";
-		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
 
-		List<AffiliationDO> affiliationList = new ArrayList<AffiliationDO>();
-		for (Map<String, Object> result : results) {
-			affiliationList.add(new AffiliationDO(result));
-		}
+		RowMapper<AffiliationDO> rowMapper = new BeanPropertyRowMapper<AffiliationDO>(AffiliationDO.class);
+		List<AffiliationDO> results = jdbcTemplate.query(sql, rowMapper);
 
-		for (AffiliationDO affiliation : affiliationList) {
+		for (AffiliationDO affiliation : results) {
 			String affiliationNm = (String) affiliation.getManagementNm();
 
 			if (!(affiliation.getBrunchCd().equals("00"))) {
@@ -55,7 +53,7 @@ public class EV8002LogicImpl implements EV8002Logic {
 			affiliation.setAffiliationNm(affiliationNm);
 		}
 
-		return affiliationList;
+		return results;
 	}
 
 	/**

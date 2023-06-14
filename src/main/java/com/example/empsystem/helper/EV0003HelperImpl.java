@@ -1,9 +1,12 @@
 package com.example.empsystem.helper;
 
 import java.util.List;
+import java.util.Locale;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.empsystem.common.MessageList;
@@ -29,6 +32,7 @@ import com.example.empsystem.model.DO.PositionDO;
 @SessionAttributes(types = SessionScopeModel.class)
 public class EV0003HelperImpl implements EV0003Helper {
 
+	private final MessageSource messageSource;
 	private final SessionScopeModel session;
 	private final EV8001Logic ev8001;
 	private final EV8002Logic ev8002;
@@ -41,7 +45,9 @@ public class EV0003HelperImpl implements EV0003Helper {
 	 * 
 	 * @param session
 	 */
-	public EV0003HelperImpl(SessionScopeModel session, EV8001Logic ev8001, EV8002Logic ev8002, EV8003Logic ev8003) {
+	public EV0003HelperImpl(MessageSource messageSource, SessionScopeModel session, EV8001Logic ev8001,
+			EV8002Logic ev8002, EV8003Logic ev8003) {
+		this.messageSource = messageSource;
 		this.session = session;
 		this.ev8001 = ev8001;
 		this.ev8002 = ev8002;
@@ -58,7 +64,7 @@ public class EV0003HelperImpl implements EV0003Helper {
 		SCRN0003Form scrn0003Form = new SCRN0003Form();
 
 		// 社員照会
-		EmployeeInfo empInfo = ev8001.findByPrimaryKey(session.getEmployeeId());
+		EmployeeInfo empInfo = ev8001.findByPrimaryKey(session.get_MOD_EMPLOYEE_ID());
 		if (empInfo.getEmployeeId().isEmpty()) {
 			scrn0003Form.getResult().add(msgList.EV00030001);
 		}
@@ -82,20 +88,31 @@ public class EV0003HelperImpl implements EV0003Helper {
 	 */
 	public SCRN0003Form execute(EmployeeInfo empInfo, BindingResult result) {
 		SCRN0003Form scrn0003Form = new SCRN0003Form();
-		scrn0003Form.setEmployeeInfo(empInfo);
 
 		// 社員更新
-		EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(session.getEmployeeId());
+		EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(empInfo.getEmployeeId());
 		if (!(existEmpInfo.getEmployeeId().isEmpty())) {
-
+			ev8001.update(empInfo);
 		} else {
 			scrn0003Form.getResult().add(msgList.EV00030002);
 		}
 
-		// 部署・役職情報設定
+		// 社員情報設定
+		scrn0003Form.setEmployeeInfo(empInfo);
 		confirmSession(session);
 		scrn0003Form.setAffiliationList(session.getAffiliationList());
 		scrn0003Form.setPositionList(session.getPositonList());
+
+		if (result.hasErrors()) {
+			return scrn0003Form;
+		}
+
+		// バリデーションチェックエラーがあれば、日本語のエラーメッセージを設定する
+		if (result.hasErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
+				scrn0003Form.getResult().add(messageSource.getMessage(error, Locale.JAPANESE));
+			}
+		}
 
 		return scrn0003Form;
 	}
@@ -104,11 +121,26 @@ public class EV0003HelperImpl implements EV0003Helper {
 	 * 削除ボタン押下
 	 * 
 	 * @param empInfo
-	 * @param result
 	 * @return
 	 */
-	public SCRN0003Form delete(EmployeeInfo empInfo, BindingResult result) {
-		return null;
+	public SCRN0003Form delete(EmployeeInfo empInfo) {
+		SCRN0003Form scrn0003Form = new SCRN0003Form();
+
+		// 社員情報設定
+		scrn0003Form.setEmployeeInfo(empInfo);
+		confirmSession(session);
+		scrn0003Form.setAffiliationList(session.getAffiliationList());
+		scrn0003Form.setPositionList(session.getPositonList());
+
+		// 社員削除
+		EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(empInfo.getEmployeeId());
+		if (!(existEmpInfo.getEmployeeId().isEmpty())) {
+			ev8001.delete(empInfo.getEmployeeId());
+		} else {
+			scrn0003Form.getResult().add(msgList.EV00030003);
+		}
+
+		return scrn0003Form;
 	}
 
 	/**

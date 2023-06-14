@@ -24,4 +24,20 @@ public interface EV8001Logic {
 	 * @param empInfo
 	 */
 	public void register(EmployeeInfo empInfo);
+	
+	/**
+	 * 社員情報更新
+	 * 
+	 * @param empInfo
+	 * @return
+	 */
+	public int update(EmployeeInfo empInfo);
+	
+	/**
+	 * 社員情報削除
+	 * 
+	 * @param employeeId
+	 * @return
+	 */
+	public int delete(String employeeId);
 }

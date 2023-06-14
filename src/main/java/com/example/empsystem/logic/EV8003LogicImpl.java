@@ -2,9 +2,10 @@ package com.example.empsystem.logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.example.empsystem.logic.Interface.EV8003Logic;
@@ -34,14 +35,11 @@ public class EV8003LogicImpl implements EV8003Logic {
 	@Override
 	public List<PositionDO> findAll() {
 		String sql = "SELECT * FROM m_position";
-		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
 
-		List<PositionDO> positionList = new ArrayList<PositionDO>();
-		for (Map<String, Object> result : results) {
-			positionList.add(new PositionDO(result));
-		}
+		RowMapper<PositionDO> rowMapper = new BeanPropertyRowMapper<PositionDO>(PositionDO.class);
+		List<PositionDO> results = jdbcTemplate.query(sql, rowMapper);
 
-		return positionList;
+		return results;
 	}
 
 	/**

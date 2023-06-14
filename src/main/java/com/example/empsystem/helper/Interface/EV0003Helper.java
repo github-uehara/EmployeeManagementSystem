@@ -33,8 +33,7 @@ public interface EV0003Helper {
 	 * 削除ボタン押下
 	 * 
 	 * @param empInfo
-	 * @param result
 	 * @return
 	 */
-	public SCRN0003Form delete(EmployeeInfo empInfo, BindingResult result);
+	public SCRN0003Form delete(EmployeeInfo empInfo);
 }

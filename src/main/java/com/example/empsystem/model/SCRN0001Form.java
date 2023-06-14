@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * SCRN0001Model管理クラス
+ * SCRN0001Form管理クラス
  * 
  * @author DC-PCN1139
  *

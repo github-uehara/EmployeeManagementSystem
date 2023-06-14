@@ -55,7 +55,7 @@ public class EV0001HelperImpl implements EV0001Helper {
 				form.getResult().add(messageSource.getMessage(error, Locale.JAPANESE));
 			}
 		} else {
-			session.setEmployeeId(form.getEmployeeId());
+			session.set_MOD_EMPLOYEE_ID(form.getEmployeeId());
 		}
 
 		return form;
