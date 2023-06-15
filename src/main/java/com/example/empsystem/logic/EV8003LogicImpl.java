@@ -3,6 +3,7 @@ package com.example.empsystem.logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,6 +23,7 @@ import com.example.empsystem.model.DO.PositionDO;
 public class EV8003LogicImpl implements EV8003Logic {
 
 	private final JdbcTemplate jdbcTemplate;
+	private ModelMapper modelMapper = new ModelMapper();
 
 	public EV8003LogicImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -43,7 +45,7 @@ public class EV8003LogicImpl implements EV8003Logic {
 	}
 
 	/**
-	 * 役職マスタ情報をセッション用のモデルに変換する
+	 * 役職マスタ情報をセッション用のモデルにBeanマッピングする
 	 * 
 	 * @param results
 	 * @return
@@ -53,7 +55,7 @@ public class EV8003LogicImpl implements EV8003Logic {
 		List<PositionList> lists = new ArrayList<PositionList>();
 
 		for (PositionDO result : results) {
-			lists.add(new PositionList(result));
+			lists.add(modelMapper.map(result, PositionList.class));
 		}
 
 		return lists;

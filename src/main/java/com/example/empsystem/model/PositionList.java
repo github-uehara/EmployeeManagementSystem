@@ -1,7 +1,5 @@
 package com.example.empsystem.model;
 
-import com.example.empsystem.model.DO.PositionDO;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,15 +15,5 @@ public class PositionList {
 
 	private String positionCd;
 	private String positionNm;
-
-	/**
-	 * コンストラクタ
-	 * 
-	 * @param positionDo
-	 */
-	public PositionList(PositionDO positionDo) {
-		this.positionCd = positionDo.getPositionCd();
-		this.positionNm = positionDo.getPositionNm();
-	}
 
 }

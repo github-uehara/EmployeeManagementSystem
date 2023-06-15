@@ -1,7 +1,5 @@
 package com.example.empsystem.model;
 
-import com.example.empsystem.model.DO.AffiliationDO;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,15 +15,5 @@ public class AffiliationList {
 
 	private String affiliationCd;
 	private String affiliationNm;
-
-	/**
-	 * コンストラクタ
-	 * 
-	 * @param result
-	 */
-	public AffiliationList(AffiliationDO result) {
-		this.affiliationCd = result.affiliationCd;
-		this.affiliationNm = result.affiliationNm;
-	}
 
 }

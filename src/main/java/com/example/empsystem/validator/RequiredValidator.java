@@ -11,7 +11,8 @@ import jakarta.validation.ConstraintValidatorContext;
 
 public class RequiredValidator implements ConstraintValidator<Required, Object> {
 	/**
-	 * 対応する日本語を返却するMapリスト
+	 * 対応する日本語を返却するMapリスト <br>
+	 * メッセージの国際化が出来たため、現在は不使用
 	 */
 	Map<String, String> map = new HashMap<String, String>() {
 		private static final long serialVersionUID = 1L;

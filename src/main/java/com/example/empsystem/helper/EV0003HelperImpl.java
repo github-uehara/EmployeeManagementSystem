@@ -88,31 +88,26 @@ public class EV0003HelperImpl implements EV0003Helper {
 	 */
 	public SCRN0003Form execute(EmployeeInfo empInfo, BindingResult result) {
 		SCRN0003Form scrn0003Form = new SCRN0003Form();
-
-		// 社員更新
-		EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(empInfo.getEmployeeId());
-		if (!(existEmpInfo.getEmployeeId().isEmpty())) {
-			ev8001.update(empInfo);
-		} else {
-			scrn0003Form.getResult().add(msgList.EV00030002);
-		}
-
-		// 社員情報設定
-		scrn0003Form.setEmployeeInfo(empInfo);
-		confirmSession(session);
-		scrn0003Form.setAffiliationList(session.getAffiliationList());
-		scrn0003Form.setPositionList(session.getPositonList());
-
-		if (result.hasErrors()) {
-			return scrn0003Form;
-		}
-
+		
 		// バリデーションチェックエラーがあれば、日本語のエラーメッセージを設定する
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
 				scrn0003Form.getResult().add(messageSource.getMessage(error, Locale.JAPANESE));
 			}
+		} else {
+			EmployeeInfo existEmpInfo = ev8001.findByPrimaryKey(empInfo.getEmployeeId());
+			if (!(existEmpInfo.getEmployeeId().isEmpty())) {
+				ev8001.update(empInfo);
+			} else {
+				scrn0003Form.getResult().add(msgList.EV00030002);
+			}
 		}
+		
+		// 社員情報設定
+		scrn0003Form.setEmployeeInfo(empInfo);
+		confirmSession(session);
+		scrn0003Form.setAffiliationList(session.getAffiliationList());
+		scrn0003Form.setPositionList(session.getPositonList());
 
 		return scrn0003Form;
 	}
